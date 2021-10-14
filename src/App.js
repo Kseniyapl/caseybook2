@@ -1,6 +1,13 @@
 import React, {useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
+import { Route, Link } from 'react-router-dom'
+
+//Custom components 
+
+import Users from './components/Users';
+import HomePage from './components/HomePage';
+
 
 //user.name -> user.first + user.last, 
 // user.location, 
@@ -9,8 +16,16 @@ import axios from 'axios';
 // user.post ->streach, 
 // user.email
 
+const admin = {
+  location: 'Miami',
+  uuid: '12345',
+  picture: "https://www.rd.com/wp-content/uploads/2021/04/GettyImages-845712410.jpg?w=2119",
+  name:'Ksu',
+  email:"123@123.123"
+}
+
 function App() {
-  const [user, setUser] = useState([])
+  const [users, setUsers] = useState([admin])
 
   useEffect (() => {
     axios.get('https://randomuser.me/api/')
@@ -22,11 +37,20 @@ function App() {
 
   return (
     <div className="App">
-      <h1>  
-        Kseniya Platonava
-      </h1>
-      <h2>Comming Soon</h2>
-
+      <header> 
+        <nav>
+          <Link to="/">Home</Link>
+          <Link to="/users">Friends Page</Link>
+        </nav>
+      </header>
+      <Route path ='/users'>
+        <Users users={users}/>
+      </Route>
+    
+      <Route exact path ='/'>
+       <HomePage />
+      </Route>
+      
     </div>
   );
 }
