@@ -7,7 +7,7 @@ import { Route, Link } from 'react-router-dom'
 
 import Users from './components/Users';
 import HomePage from './components/HomePage';
-
+import User from './components/User';
 
 //user.name -> user.first + user.last, 
 // user.location, 
@@ -20,7 +20,9 @@ const admin = {
   location: {
     state: 'FL'
   },
-  uuid: '12345',
+  login:{
+  uuid: '12345'
+  },
   picture: {
     medium: "https://www.rd.com/wp-content/uploads/2021/04/GettyImages-845712410.jpg?w=2119",
   },
@@ -50,7 +52,11 @@ function App() {
           <Link to="/users">Friends Page</Link>
         </nav>
       </header>
-      <Route path ='/users'>
+      <Route path ='/users/:id'>
+        <User users={users} />
+      </Route>
+
+      <Route exact path ='/users'>
         <Users users={users}/>
       </Route>
     
