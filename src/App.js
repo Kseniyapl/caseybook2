@@ -17,10 +17,16 @@ import HomePage from './components/HomePage';
 // user.email
 
 const admin = {
-  location: 'Miami',
+  location: {
+    state: 'FL'
+  },
   uuid: '12345',
-  picture: "https://www.rd.com/wp-content/uploads/2021/04/GettyImages-845712410.jpg?w=2119",
-  name:'Ksu',
+  picture: {
+    medium: "https://www.rd.com/wp-content/uploads/2021/04/GettyImages-845712410.jpg?w=2119",
+  },
+  name:{
+    first: 'Ksu'
+  },
   email:"123@123.123"
 }
 
@@ -30,7 +36,8 @@ function App() {
   useEffect (() => {
     axios.get('https://randomuser.me/api/')
     .then(res =>{
-      console.log(res)
+      console.log(res.data.results)
+      setUsers([...users, ...res.data.results])
     }).catch(err => console.error(err))
 
   }, [])
